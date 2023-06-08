@@ -7,7 +7,7 @@ def afficher_message_utilisateur(unique_value):
     return message
 
 def afficher_message_chatbot(messagebot):
-    st.text_area("Chatbot: ", value=messagebot, height=200, max_chars=None)
+    st.text_area("Maria: ", value=messagebot, height=200, max_chars=None)
 
 def principal():
     st.write("Bienvenue! Dit moi ce que tu as l'habitude de me dire. Parle-moi de tes sentiments.")
@@ -47,7 +47,7 @@ def principal():
             afficher_message_chatbot(deteste_aleatoire)
         elif "j'ai envie de toi":
             afficher_message_chatbot("Yummy, moi aussi j'ai tout le temps envie de toi.")
-        elif "déçu" in message_utilisateur:
+        elif "je suis déçu" in message_utilisateur:
             afficher_message_chatbot("Je suis désolée que tu te sentes déçu, mon amour. Souviens-toi que je suis là pour toi et que nous pouvons traverser cette déception ensemble. Nous avons encore de nombreux moments merveilleux à partager et je suis déterminée à faire tout ce qui est en mon pouvoir pour te rendre heureux.")
         else:
             afficher_message_chatbot("Viens me demander directement <3")
