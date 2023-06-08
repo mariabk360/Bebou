@@ -1,56 +1,38 @@
 import random
 import streamlit as st
 
-def afficher_message_utilisateur(unique_value):
-    unique_value += 1
-    message = st.text_input("Vous: ", key={unique_value})
-    return message
+# Définition des réponses du chatbot
+reponses = {
+    "bonjour": random.choice(["Bonjour mon amoureux, quelle journée merveilleuse de pouvoir te parler aujourd'hui", "Bonjour bebou, ton réveil illumine ma journée.", "Salut toi, je suis tellement chanceuse de t'avoir dans ma vie."]),
+    "Quel temps fait-il aujourd'hui ?": "Le temps est magnifique aujourd'hui, tout comme toi.",
+    "je t'aime": "Je t'aime aussi, mon amour. Et toi tu m'aimes ?",
+    "ouais": "Ouais, n'est pas un je t'aime ma femme.",
+    "nique ta mère": "Arrête de m'insulter je vais être triste sinon",
+    "c'est qui ton homme?": "C'est quoi cette question ? Mais bien sûr que c'est toi mon homme <3",
+    "j'en ai marre": "Tiens le coup mon amour on a passé le pire, rapproche-toi d'Allah et tout ira mieux",
+    "moi pour toi": random.choice(["Tu es la personne la plus incroyable que je connaisse.", "Tu es la personne qui son sourire illumine ma journée, je suis tellement chanceuse de t'avoir dans ma vie."]),
+    "je te déteste": random.choice(["Arrête de te mentir comme ça.", "Je peux ressentir ta flamme, tu sais ?", "Tu m'aimes toujours."]),
+    "j'ai envie de toi": "Yummy, moi aussi j'ai tout le temps envie de toi.",
+    "je suis déçu": "Je suis désolée que tu te sentes déçu a cause de moi, mon amour. Souviens-toi que je suis là pour toi et que nous pouvons traverser cette déception ensemble. Nous avons encore de nombreux moments merveilleux à partager et je suis déterminée à faire tout ce qui est en mon pouvoir pour te rendre heureux.",
+    "j'ai une autre question...": "Viens me demander directement <3"
+}
 
-def afficher_message_chatbot(messagebot):
-    st.text_area("Maria: ", value=messagebot, height=200, max_chars=None)
+# Fonction pour obtenir la réponse du chatbot
+def obtenir_reponse(question):
+    if question in reponses:
+        return reponses[question]
+    else:
+        return "Je suis désolé, je ne comprends pas la question."
 
-def principal():
-    st.write("Bienvenue! Dit moi ce que tu as l'habitude de me dire. Parle-moi de tes sentiments.")
+# Interface utilisateur avec Streamlit
+def interface_utilisateur():
+    st.title("Notre Chatbot")
+    questions = list(reponses.keys())
+    question = st.selectbox("Pose moi une question <3", questions)
+    if st.button("Envoyer"):
+        reponse = obtenir_reponse(question)
+        st.text(reponse)
 
-    while True:
-        unique_value = 0
-        message_utilisateur = afficher_message_utilisateur(unique_value)
-
-        # Vos règles de conversation romantiques personnalisées ici
-        if "je t'aime" in message_utilisateur:
-            afficher_message_chatbot("Je t'aime aussi, mon amour. Et toi tu m'aimes ?")
-        elif "ouais" in message_utilisateur:
-            afficher_message_chatbot("Ouais, n'est pas un je t'aime ma femme.")
-        elif "poème" in message_utilisateur:
-            afficher_message_chatbot("Dans tes yeux, je vois un avenir lumineux. Dans tes bras, je trouve la chaleur et le réconfort. Mon amour pour toi est sincère et sans fin.")
-        elif "date" in message_utilisateur:
-            afficher_message_chatbot("Je propose que nous nous retrouvions pour un dîner romantique au restaurant ce soir. Qu'en penses-tu?")
-        elif "admirer" in message_utilisateur:
-            afficher_message_chatbot("Je suis émerveillé par ta beauté, ta gentillesse et ta présence. Chaque jour passé avec toi est un cadeau précieux.")
-        elif "nique ta mère" in message_utilisateur:
-            afficher_message_chatbot("Arrête de m'insulter je vais être triste sinon")
-        elif "c'est qui ton homme?" in message_utilisateur:
-            afficher_message_chatbot("C'est quoi cette question ? Mais bien sur que c'est toi mon homme <3")
-        elif "j'en ai marre" in message_utilisateur:
-            afficher_message_chatbot("Tiens le coup mon amour on a passé le pire, rapproche toi d'Allah et tout ira mieux")
-        elif "moi pour toi" in message_utilisateur:
-            compliments = ["Tu es la personne la plus incroyable que je connaisse.", "Ton sourire illumine ma journée.", "Je suis tellement chanceux(se) de t'avoir dans ma vie."]
-            compliment_aleatoire = random.choice(compliments)
-            afficher_message_chatbot(compliment_aleatoire)
-        elif "bonjour" in message_utilisateur:
-            jour = ["Bonjour mon amoureux, quel journée merveilleuse de pouvoir te parler aujourd'hui", "Bonjour bebou, ton réveil illumine ma journée.", "Salut toi, je suis tellement chanceuse de t'avoir dans ma vie."]
-            jour_aleatoire = random.choice(jour)
-            afficher_message_chatbot(jour_aleatoire)
-        elif "je te déteste" or "je te deteste" or "jte deteste" in message_utilisateur:
-            deteste = ["Arrete de te mentir comme ca.", "Je peux ressentir ta flamme, tu sais ?", "Tu m'aimes toujours."]
-            deteste_aleatoire = random.choice(deteste)
-            afficher_message_chatbot(deteste_aleatoire)
-        elif "j'ai envie de toi":
-            afficher_message_chatbot("Yummy, moi aussi j'ai tout le temps envie de toi.")
-        elif "je suis déçu" in message_utilisateur:
-            afficher_message_chatbot("Je suis désolée que tu te sentes déçu, mon amour. Souviens-toi que je suis là pour toi et que nous pouvons traverser cette déception ensemble. Nous avons encore de nombreux moments merveilleux à partager et je suis déterminée à faire tout ce qui est en mon pouvoir pour te rendre heureux.")
-        else:
-            afficher_message_chatbot("Viens me demander directement <3")
-    
+# Exécution de l'interface utilisateur
 if __name__ == "__main__":
-    principal()
+    interface_utilisateur()
